@@ -421,16 +421,23 @@
         }
     };
 
-    // CommonJS module is defined
-    if (typeof window === 'undefined' && typeof module !== 'undefined') {
-        // Export module
-        module.exports = _date;
-    // Integrate with Underscore.js
-    } else {
-        if (this._ !== undefined && this._.mixin !== undefined) {
-            this._.mixin({date : _date});
-        }
-        this._date = _date;
-    }
+    // START fix for running under core-on-node, which initializes the 'window' object
 
+    // Export module
+    module.exports = _date;
+
+    // // CommonJS module is defined
+    // if (typeof window === 'undefined' && typeof module !== 'undefined') {
+    //     // Export module
+    //     module.exports = _date;
+    // // Integrate with Underscore.js
+    // } else {
+    //     if (this._ !== undefined && this._.mixin !== undefined) {
+    //         this._.mixin({date : _date});
+    //     }
+    //     this._date = _date;
+    // }
+
+    // END fix for running under core-on-node
+    
 }());
